@@ -14,7 +14,6 @@ function main() {
 //   removeAppendedElements();
   if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
     showDeckAtHistory()
-    alert("https://eiketsu-taisen.net/members/history/daily")
   }
 }
 
@@ -33,7 +32,7 @@ function main() {
 function showDeckAtHistory(){
   const SHOW_DECK_BATTLE_TYPE = ["全国対戦"];
 
-  const blockBattleList = document.getElementsByClassName("info");
+  const blockBattleList = document.getElementsByClassName("mb5");
   console.log(blockBattleList);
 
   [].forEach.call(blockBattleList, (battleBlock) => {
