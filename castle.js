@@ -73,20 +73,75 @@ function showDeckAtHistory(){
 // }
 
 function appendDeckArea(){
-  if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
-    historyBlock.style.height = "158px";
-  }
-
    // template要素を取得
    var template = document.getElementById('template');
    var fragment = document.createDocumentFragment();
 
        var clone = document.importNode(template.content, true);
        // 複製した各要素に値を設定
-       const result = document.createElement("div"); 
-       const wraparea = clone.querySelector('.mb5');
-       wraparea.appendChild(result);
-       console.log(wraparea)
+       const wraparea = clone.querySelectorAll('.mb5');
+    //    wraparea.style.height = "158px";
+    //    wraparea.appendChild(result);
+    const SHOW_DECK_BATTLE_TYPE = ["全国対戦", "群雄伝", "店内対戦", "戦友対戦"];
+
+      [].forEach.call(wraparea, (battleBlock) => {
+
+    var battleType = battleBlock.getElementsByClassName("ta_r")[0];
+    if (SHOW_DECK_BATTLE_TYPE.includes(battleType.textContent)) {
+    //   var historyBlock = battleBlock.appendChild(result)
+
+    const myDeckDiv = document.createElement("div");
+    myDeckDiv.style.position = "relative";
+    myDeckDiv.style.top = location.href.startsWith("https://eiketsu-taisen.net/members/history/daily") ? "30px" : "40px";
+    if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) myDeckDiv.style.left = "-98px";
+    myDeckDiv.style.width = "260px";
+    myDeckDiv.style.height = "70px";
+    myDeckDiv.classList.add("appended-class");
+  
+    const myGageDiv = document.createElement("div");
+    myGageDiv.style.position = "relative";
+    myGageDiv.classList.add("my-gage");
+    myDeckDiv.appendChild(myGageDiv);
+  
+    const myCardTable = document.createElement("table");
+    myCardTable.style.border = "solid 1px #fff";
+    myCardTable.style.borderCollapse = "separate";
+    myCardTable.style.borderSpacing = "2px";
+    myCardTable.style.margin = "auto";
+    const myCardTr = document.createElement("tr");
+    // myCardTr.id = historyBlock.href + "_mydata";
+    myCardTable.appendChild(myCardTr);
+    myDeckDiv.appendChild(myCardTable);
+  
+    const enemyDeckDiv = document.createElement("div")
+    enemyDeckDiv.style.position = "relative";
+    enemyDeckDiv.style.top = location.href.startsWith("https://eiketsu-taisen.net/members/history/daily") ? "30px" : "40px";
+    enemyDeckDiv.style.left = location.href.startsWith("https://eiketsu-taisen.net/members/history/daily") ? "-8px" : "20px";
+    enemyDeckDiv.style.width = "260px";
+    enemyDeckDiv.style.height = "70px";
+    enemyDeckDiv.classList.add("appended-class");
+  
+    const enemyGageDiv = document.createElement("div");
+    enemyGageDiv.style.position = "relative";
+    enemyGageDiv.classList.add("enemy-gage");
+    enemyDeckDiv.appendChild(enemyGageDiv);
+  
+    const enemyCardTable = document.createElement("table");
+    enemyCardTable.style.border = "solid 1px #fff";
+    enemyCardTable.style.borderCollapse = "separate";
+    enemyCardTable.style.borderSpacing = "2px";
+    enemyCardTable.style.margin = "auto";
+    const enemyCardTr = document.createElement("tr");
+    // enemyCardTr.id = historyBlock.href + "_enemydata";
+    enemyCardTable.appendChild(enemyCardTr);
+    enemyDeckDiv.appendChild(enemyCardTable);
+
+    //   console.log(historyBlock)
+    //   appendDeckArea(historyBlock);
+    //   appendDeck(historyBlock)
+    }
+  });
+}
        fragment.appendChild(clone);
    
    document.getElementById('template').appendChild(fragment);
