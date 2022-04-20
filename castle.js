@@ -136,12 +136,14 @@ function appendDeckArea(){
     enemyCardTable.appendChild(enemyCardTr);
     enemyDeckDiv.appendChild(enemyCardTable);
 
+    console.log(enemyDeckDiv)
+
     //   console.log(historyBlock)
     //   appendDeckArea(historyBlock);
     //   appendDeck(historyBlock)
     }
   });
-}
+
        fragment.appendChild(clone);
    
    document.getElementById('template').appendChild(fragment);
