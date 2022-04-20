@@ -32,17 +32,25 @@ function main() {
 function showDeckAtHistory(){
   const SHOW_DECK_BATTLE_TYPE = ["全国対戦"];
 
-  const blockBattleList = document.getElementsByClassName("mb5");
-  console.log(blockBattleList);
+  const template = document.getElementById('template');
+  const content = template.content;
+  const example = content.getElementsByClassName('mb5');
+  console.log(example)
 
-  [].forEach.call(blockBattleList, (battleBlock) => {
-    var battleType = battleBlock.getElementsByClassName("ta_r")[0];
-    if (SHOW_DECK_BATTLE_TYPE.includes(battleType.textContent)) {
-      var historyBlock = battleBlock.getElementsByClassName("mb5")[0]
-      appendDeckArea(historyBlock);
-      appendDeck(historyBlock)
-    }
-  });
+
+//   documentfragment.querySelector(".global_menu_tab")
+
+//   const blockBattleList = document.getElementsByClassName("global_menu_tab");
+//   console.log(blockBattleList);
+
+//   [].forEach.call(blockBattleList, (battleBlock) => {
+//     var battleType = battleBlock.getElementsByClassName("ta_r")[0];
+//     if (SHOW_DECK_BATTLE_TYPE.includes(battleType.textContent)) {
+//       var historyBlock = battleBlock.getElementsByClassName("mb5")[0]
+//       appendDeckArea(historyBlock);
+//       appendDeck(historyBlock)
+//     }
+//   });
 //   appendToggleNameButton();
 }
 
