@@ -33,6 +33,7 @@ function appendDeckArea() {
 
     for (var i = 0; i < wraparea.length; i++) {
         wraparea[i].style.position = "relative";
+        wraparea[i].style.height = "145px";
     }
 
 
@@ -45,8 +46,8 @@ function appendDeckArea() {
 
 
             const myDeckDiv = document.createElement("div");
-            myDeckDiv.style.position = "relative";
-            myDeckDiv.style.width = "50%";
+            myDeckDiv.style.position = "absolute";
+            myDeckDiv.style.width = "300px";
             myDeckDiv.style.height = "70px";
             myDeckDiv.classList.add("appended-class");
 
@@ -70,7 +71,7 @@ function appendDeckArea() {
             const enemyDeckDiv = document.createElement("div")
             enemyDeckDiv.style.position = "absolute";
             enemyDeckDiv.style.right = "0";
-            enemyDeckDiv.style.width = "50%";
+            enemyDeckDiv.style.width = "300px";
             enemyDeckDiv.style.height = "70px";
             enemyDeckDiv.style.top = "70px";
             enemyDeckDiv.classList.add("appended-class");
