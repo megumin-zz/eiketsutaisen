@@ -34,7 +34,7 @@ function appendDeckArea() {
 
     for (var i = 0; i < wraparea.length; i++) {
         wraparea[i].style.position = "relative";
-        wraparea[i].style.height = "145px";
+        wraparea[i].style.height = "135px";
     }
 
 
@@ -74,7 +74,7 @@ function appendDeckArea() {
             enemyDeckDiv.style.right = "0";
             enemyDeckDiv.style.width = "300px";
             enemyDeckDiv.style.height = "70px";
-            enemyDeckDiv.style.top = "70px";
+            enemyDeckDiv.style.top = "58px";
             enemyDeckDiv.classList.add("appended-class");
 
             const enemyGageDiv = document.createElement("div");
@@ -149,10 +149,12 @@ function appendDeck(historyBlock) {
         playerchildwraparea.style.background = '#00f000';
         playerchildwraparea.style.height = "20px";
         playerchildwraparea.style.top = "-13px";
+        // 城ゲージ
+        playerchildwraparea.style.display = "none";
 
         myDeckArea.parentNode.style.border = "none";
         myDeckArea.parentNode.style.position = "absolute";
-        myDeckArea.parentNode.style.top = "12px";
+        myDeckArea.parentNode.style.top = "0";
         myDeckArea.parentNode.style.left = "0";
         myDeckArea.parentNode.style.right = "0";
         myDeckArea.parentNode.style.margin = "0 auto";
@@ -173,6 +175,8 @@ function appendDeck(historyBlock) {
         enemychildwraparea.style.background = '#00f000';
         enemychildwraparea.style.height = "20px";
         enemychildwraparea.style.top = "2px";
+        // 城ゲージ
+        enemychildwraparea.style.display = "none";
 
 
         enemyDeckArea.parentNode.style.border = "none";
