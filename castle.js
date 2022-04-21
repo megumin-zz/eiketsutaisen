@@ -6,10 +6,10 @@ function main() {
         return;
     }
 
-    //   if (isScreenshotMode()) {
-    //     alert("スクリーンショットモードには対応していません、通常モードで実行してください");
-    //     return;
-    //   }
+      if (isScreenshotMode()) {
+        alert("スクリーンショットモードには対応していません、通常モードで実行してください");
+        return;
+      }
 
     //   removeAppendedElements();
     if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
@@ -20,6 +20,7 @@ function main() {
 
 function showDeckAtHistory() {
     appendDeckArea();
+    appendToggleNameButton();
 }
 
 
@@ -259,19 +260,28 @@ function addCardToDeckArea(deckArea, card) {
 
 }
 
-// function toggleMyName() {
-//   [].forEach.call(document.getElementsByClassName("battle_list_mydata"), (mydata) => {
-//       toggleVisibility(mydata.getElementsByClassName("battle_list_name")[0])
-//     }
-//   );
-// }
+function toggleMyName() {
+    const host = document.getElementById('app');
+    const elem = host.getElementsByTagName('ekt-main')[0];
+    const targetElement = elem.shadowRoot.querySelectorAll(".mb5");
 
-// function toggleEnemyName() {
-//   [].forEach.call(document.getElementsByClassName("battle_list_enemydata"), (mydata) => {
-//       toggleVisibility(mydata.getElementsByClassName("battle_list_name")[0])
-//     }
-//   );
-// }
+  [].forEach.call(targetElement, (mydata) => {
+      toggleVisibility(mydata.getElementsByClassName("player")[0].firstElementChild)
+    }
+  );
+}
+
+function toggleEnemyName() {
+    const host = document.getElementById('app');
+    const elem = host.getElementsByTagName('ekt-main')[0];
+    const targetElement = elem.shadowRoot.querySelectorAll(".mb5");
+
+  [].forEach.call(targetElement, (mydata) => {
+    //   toggleVisibility(mydata.getElementsByClassName("player")[0].firstElementChild)
+    console.log(mydata.getElementsByClassName("player")[0].nextElementSibling.firstElementChild)
+    }
+  );
+}
 
 // function toggleResult() {
 //   toggleElemetnsVisibility(document.getElementsByClassName("battle_list_result"));
@@ -283,42 +293,48 @@ function addCardToDeckArea(deckArea, card) {
 //   });
 // }
 
-// function toggleVisibility(target) {
-//   if (target.style.visibility != "hidden") {
-//     target.style.visibility = "hidden";
-//   } else {
-//     target.style.visibility = "visible"
-//   }
-// }
+function toggleVisibility(target) {
+  if (target.style.visibility != "hidden") {
+    target.style.visibility = "hidden";
+  } else {
+    target.style.visibility = "visible"
+  }
+}
 
-// function appendToggleNameButton() {
-//   const toggleMyNameButton = document.createElement("button");
-//   toggleMyNameButton.addEventListener('click', function () {
-//     toggleMyName()
-//   });
-//   toggleMyNameButton.innerHTML = "自軍名 on/off";
-//   toggleMyNameButton.classList.add("appended-class");
-//   toggleMyNameButton.style.display = "inline-block";
-//   toggleMyNameButton.style.margin = "0 5px";
-//   toggleMyNameButton.style.padding = "6px";
-//   toggleMyNameButton.style.fontWeight = "bold";
+function appendToggleNameButton() {
+  const toggleMyNameButton = document.createElement("button");
+  toggleMyNameButton.addEventListener('click', function () {
+    toggleMyName()
+  });
+  toggleMyNameButton.innerHTML = "自軍名 on/off";
+  toggleMyNameButton.classList.add("appended-class");
+  toggleMyNameButton.style.display = "inline-block";
+  toggleMyNameButton.style.margin = "0 5px";
+  toggleMyNameButton.style.padding = "6px";
+  toggleMyNameButton.style.fontWeight = "bold";
+  toggleMyNameButton.style.border = "1px solid gray";
 
-//   const toggleEnemyNameButton = document.createElement("button");
-//   toggleEnemyNameButton.addEventListener('click', function () {
-//     toggleEnemyName()
-//   });
-//   toggleEnemyNameButton.innerHTML = "敵軍名 on/off";
-//   toggleEnemyNameButton.classList.add("appended-class");
-//   toggleEnemyNameButton.style.display = "inline-block";
-//   toggleEnemyNameButton.style.margin = "0 5px";
-//   toggleEnemyNameButton.style.padding = "6px";
-//   toggleEnemyNameButton.style.fontWeight = "bold";
+  const toggleEnemyNameButton = document.createElement("button");
+  toggleEnemyNameButton.addEventListener('click', function () {
+    toggleEnemyName()
+  });
+  toggleEnemyNameButton.innerHTML = "敵軍名 on/off";
+  toggleEnemyNameButton.classList.add("appended-class");
+  toggleEnemyNameButton.style.display = "inline-block";
+  toggleEnemyNameButton.style.margin = "0 5px";
+  toggleEnemyNameButton.style.padding = "6px";
+  toggleEnemyNameButton.style.fontWeight = "bold";
+  toggleEnemyNameButton.style.border = "1px solid gray";
 
-//   const targetElement = document.getElementsByClassName("text_pager")[0];
-//   targetElement.insertBefore(toggleMyNameButton, targetElement.firstChild);
-//   targetElement.appendChild(toggleEnemyNameButton);
-// }
+  const host = document.getElementById('app');
+  const elem = host.getElementsByTagName('ekt-main')[0];
+  const targetElement = elem.shadowRoot.querySelectorAll(".daily_log")[0];
 
-// function isScreenshotMode() {
-//   return document.getElementsByClassName("btn_switch_screen on").length > 0;
-// }
+  targetElement.insertBefore(toggleMyNameButton, targetElement.firstChild);
+  targetElement.insertBefore(toggleEnemyNameButton, targetElement.firstChild);
+
+}
+
+function isScreenshotMode() {
+  return document.getElementsByClassName("btn_switch_screen on").length > 0;
+}
