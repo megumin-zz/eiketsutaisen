@@ -6,10 +6,10 @@ function main() {
         return;
     }
 
-      if (isScreenshotMode()) {
+    if (isScreenshotMode()) {
         alert("スクリーンショットモードには対応していません、通常モードで実行してください");
         return;
-      }
+    }
 
     //   removeAppendedElements();
     if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
@@ -265,10 +265,10 @@ function toggleMyName() {
     const elem = host.getElementsByTagName('ekt-main')[0];
     const targetElement = elem.shadowRoot.querySelectorAll(".mb5");
 
-  [].forEach.call(targetElement, (mydata) => {
-      toggleVisibility(mydata.getElementsByClassName("player")[0].firstElementChild)
+    [].forEach.call(targetElement, (mydata) => {
+        toggleVisibility(mydata.getElementsByClassName("player")[0].firstElementChild)
     }
-  );
+    );
 }
 
 function toggleEnemyName() {
@@ -276,11 +276,10 @@ function toggleEnemyName() {
     const elem = host.getElementsByTagName('ekt-main')[0];
     const targetElement = elem.shadowRoot.querySelectorAll(".mb5");
 
-  [].forEach.call(targetElement, (mydata) => {
-    //   toggleVisibility(mydata.getElementsByClassName("player")[0].firstElementChild)
-    console.log(mydata.getElementsByClassName("player")[0].nextElementSibling.firstElementChild)
+    [].forEach.call(targetElement, (mydata) => {
+        toggleVisibility(mydata.getElementsByClassName("player")[0].nextElementSibling.firstElementChild)
     }
-  );
+    );
 }
 
 // function toggleResult() {
@@ -294,47 +293,47 @@ function toggleEnemyName() {
 // }
 
 function toggleVisibility(target) {
-  if (target.style.visibility != "hidden") {
-    target.style.visibility = "hidden";
-  } else {
-    target.style.visibility = "visible"
-  }
+    if (target.style.visibility != "hidden") {
+        target.style.visibility = "hidden";
+    } else {
+        target.style.visibility = "visible"
+    }
 }
 
 function appendToggleNameButton() {
-  const toggleMyNameButton = document.createElement("button");
-  toggleMyNameButton.addEventListener('click', function () {
-    toggleMyName()
-  });
-  toggleMyNameButton.innerHTML = "自軍名 on/off";
-  toggleMyNameButton.classList.add("appended-class");
-  toggleMyNameButton.style.display = "inline-block";
-  toggleMyNameButton.style.margin = "0 5px";
-  toggleMyNameButton.style.padding = "6px";
-  toggleMyNameButton.style.fontWeight = "bold";
-  toggleMyNameButton.style.border = "1px solid gray";
+    const toggleMyNameButton = document.createElement("button");
+    toggleMyNameButton.addEventListener('click', function () {
+        toggleMyName()
+    });
+    toggleMyNameButton.innerHTML = "自軍名 on/off";
+    toggleMyNameButton.classList.add("appended-class");
+    toggleMyNameButton.style.display = "inline-block";
+    toggleMyNameButton.style.margin = "0 5px";
+    toggleMyNameButton.style.padding = "13px";
+    toggleMyNameButton.style.fontWeight = "bold";
+    toggleMyNameButton.style.border = "1px solid gray";
 
-  const toggleEnemyNameButton = document.createElement("button");
-  toggleEnemyNameButton.addEventListener('click', function () {
-    toggleEnemyName()
-  });
-  toggleEnemyNameButton.innerHTML = "敵軍名 on/off";
-  toggleEnemyNameButton.classList.add("appended-class");
-  toggleEnemyNameButton.style.display = "inline-block";
-  toggleEnemyNameButton.style.margin = "0 5px";
-  toggleEnemyNameButton.style.padding = "6px";
-  toggleEnemyNameButton.style.fontWeight = "bold";
-  toggleEnemyNameButton.style.border = "1px solid gray";
+    const toggleEnemyNameButton = document.createElement("button");
+    toggleEnemyNameButton.addEventListener('click', function () {
+        toggleEnemyName()
+    });
+    toggleEnemyNameButton.innerHTML = "敵軍名 on/off";
+    toggleEnemyNameButton.classList.add("appended-class");
+    toggleEnemyNameButton.style.display = "inline-block";
+    toggleEnemyNameButton.style.margin = "0 5px";
+    toggleEnemyNameButton.style.padding = "13px";
+    toggleEnemyNameButton.style.fontWeight = "bold";
+    toggleEnemyNameButton.style.border = "1px solid gray";
 
-  const host = document.getElementById('app');
-  const elem = host.getElementsByTagName('ekt-main')[0];
-  const targetElement = elem.shadowRoot.querySelectorAll(".daily_log")[0];
+    const host = document.getElementById('app');
+    const elem = host.getElementsByTagName('ekt-main')[0];
+    const targetElement = elem.shadowRoot.querySelectorAll(".daily_log")[0];
 
-  targetElement.insertBefore(toggleMyNameButton, targetElement.firstChild);
-  targetElement.insertBefore(toggleEnemyNameButton, targetElement.firstChild);
+    targetElement.insertBefore(toggleEnemyNameButton, targetElement.firstChild);
+    targetElement.insertBefore(toggleMyNameButton, targetElement.firstChild);
 
 }
 
 function isScreenshotMode() {
-  return document.getElementsByClassName("btn_switch_screen on").length > 0;
+    return document.getElementsByClassName("btn_switch_screen on").length > 0;
 }
