@@ -1,216 +1,262 @@
 main();
 
 function main() {
-  if (!location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
-    alert("英傑大戦.NETの対戦履歴ページ又は戦いの記録ページを開いた状態で実行してください");
-    return;
-  }
+    if (!location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
+        alert("英傑大戦.NETの対戦履歴ページ又は戦いの記録ページを開いた状態で実行してください");
+        return;
+    }
 
-//   if (isScreenshotMode()) {
-//     alert("スクリーンショットモードには対応していません、通常モードで実行してください");
-//     return;
-//   }
+    //   if (isScreenshotMode()) {
+    //     alert("スクリーンショットモードには対応していません、通常モードで実行してください");
+    //     return;
+    //   }
 
-//   removeAppendedElements();
-  if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
-    showDeckAtHistory()
-  }
+    //   removeAppendedElements();
+    if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
+        showDeckAtHistory()
+    }
 }
 
-// function showDeckAtRecord(){
 
-//   const recordOfWarTabRecordList = document.getElementsByClassName("record_of_war_tab_record");
-
-//   [].forEach.call(recordOfWarTabRecordList, (recordOfWarTabRcord) => {
-//     var historyBlock = recordOfWarTabRcord.firstElementChild
-//     appendDeckArea(historyBlock);
-//     appendDeck(historyBlock)
-//   });
-// }
-
-
-function showDeckAtHistory(){
-  appendDeckArea();
-  
-//    // template要素を取得
-//    var template = document.getElementById('template');
-//    var fragment = document.createDocumentFragment();
-
-//        var clone = document.importNode(template.content, true);
-//        // 複製した各要素に値を設定
-//        const result = document.createElement("div"); 
-//        const wraparea = clone.querySelector('.mb5');
-//        wraparea.appendChild(result);
-//        console.log(wraparea)
-//        fragment.appendChild(clone);
-   
-//    document.getElementById('template').appendChild(fragment);
-
-
-//   documentfragment.querySelector(".global_menu_tab")
-
-//   const blockBattleList = document.getElementsByClassName("global_menu_tab");
-//   console.log(blockBattleList);
-
-//   [].forEach.call(blockBattleList, (battleBlock) => {
-//     var battleType = battleBlock.getElementsByClassName("ta_r")[0];
-//     if (SHOW_DECK_BATTLE_TYPE.includes(battleType.textContent)) {
-//       var historyBlock = battleBlock.getElementsByClassName("mb5")[0]
-//       appendDeckArea(historyBlock);
-//       appendDeck(historyBlock)
-//     }
-//   });
-//   appendToggleNameButton();
+function showDeckAtHistory() {
+    appendDeckArea();
 }
 
-// function removeAppendedElements(){
-//   const appendedElementList = document.getElementsByClassName("appended-class");
-//   for ( var i = appendedElementList.length - 1; i >= 0 ; i--) {
-//     appendedElementList[i].remove();
-//   };
-// }
 
-function appendDeckArea(){
-   // template要素を取得
-   var template = document.getElementById('template');
-   var fragment = document.createDocumentFragment();
+function appendDeckArea() {
+    // template要素を取得
 
-       var clone = document.importNode(template.content, true);
-       // 複製した各要素に値を設定
-       const wraparea = clone.querySelectorAll('.mb5');
 
-    //    wraparea.style.height = "158px";
-    //    wraparea.appendChild(result);
-    const SHOW_DECK_BATTLE_TYPE = ["全国対戦", "群雄伝", "店内対戦", "戦友対戦"];
-    const myDeckDiv = document.createElement("div");
+    const host = document.getElementById('app');
+    const elem = host.getElementsByTagName('ekt-main')[0];
+    const wraparea = elem.shadowRoot.querySelectorAll('.mb5');
 
-      [].forEach.call(wraparea, (battleBlock, index) => {
+    for (var i = 0; i < wraparea.length; i++) {
+        wraparea[i].style.position = "relative";
+    }
 
-          clone.querySelectorAll('.mb5')[index] = battleBlock;
 
-          console.log(clone.querySelectorAll('.mb5')[index])
+    [].forEach.call(wraparea, (battleBlock, index) => {
 
-    var battleType = battleBlock.getElementsByClassName("ta_r")[0];
- 
+        var battleType = battleBlock.getElementsByClassName("ta_r")[0];
 
-    if (SHOW_DECK_BATTLE_TYPE.includes(battleType.textContent)) {
-    //   var historyBlock = battleBlock.appendChild(result)
+        const SHOW_DECK_BATTLE_TYPE = ["全国対戦", "群雄伝", "店内対戦", "戦友対戦"];
+        if (SHOW_DECK_BATTLE_TYPE.includes(battleType.textContent)) {
 
-  
-    clone.querySelectorAll('.mb5')[index].style.position = "relative";
-    clone.querySelectorAll('.mb5')[index].style.top = location.href.startsWith("https://eiketsu-taisen.net/members/history/daily") ? "30px" : "40px";
-    if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) clone.querySelectorAll('.mb5')[index].style.left = "-98px";
-    clone.querySelectorAll('.mb5')[index].style.width = "260px";
-    clone.querySelectorAll('.mb5')[index].style.height = "70px";
-    clone.querySelectorAll('.mb5')[index].classList.add("appended-class");
-  
-    const myGageDiv = document.createElement("div");
-    myGageDiv.style.position = "relative";
-    myGageDiv.classList.add("my-gage");
-    clone.querySelectorAll('.mb5')[index].appendChild(myGageDiv);
-  
-    const myCardTable = document.createElement("table");
-    myCardTable.style.border = "solid 1px #fff";
-    myCardTable.style.borderCollapse = "separate";
-    myCardTable.style.borderSpacing = "2px";
-    myCardTable.style.margin = "auto";
-    const myCardTr = document.createElement("tr");
-    // myCardTr.id = historyBlock.href + "_mydata";
-    myCardTable.appendChild(myCardTr);
-    clone.querySelectorAll('.mb5')[index].appendChild(myCardTable);
-  
-    const enemyDeckDiv = document.createElement("div")
-    enemyDeckDiv.style.position = "relative";
-    enemyDeckDiv.style.top = location.href.startsWith("https://eiketsu-taisen.net/members/history/daily") ? "30px" : "40px";
-    enemyDeckDiv.style.left = location.href.startsWith("https://eiketsu-taisen.net/members/history/daily") ? "-8px" : "20px";
-    enemyDeckDiv.style.width = "260px";
-    enemyDeckDiv.style.height = "70px";
-    enemyDeckDiv.classList.add("appended-class");
-  
-    const enemyGageDiv = document.createElement("div");
-    enemyGageDiv.style.position = "relative";
-    enemyGageDiv.classList.add("enemy-gage");
-    enemyDeckDiv.appendChild(enemyGageDiv);
-  
-    const enemyCardTable = document.createElement("table");
-    enemyCardTable.style.border = "solid 1px #fff";
-    enemyCardTable.style.borderCollapse = "separate";
-    enemyCardTable.style.borderSpacing = "2px";
-    enemyCardTable.style.margin = "auto";
-    const enemyCardTr = document.createElement("tr");
-    // enemyCardTr.id = historyBlock.href + "_enemydata";
-    enemyCardTable.appendChild(enemyCardTr);
-    enemyDeckDiv.appendChild(enemyCardTable);
+
+            const myDeckDiv = document.createElement("div");
+            myDeckDiv.style.position = "relative";
+            myDeckDiv.style.width = "50%";
+            myDeckDiv.style.height = "70px";
+            myDeckDiv.classList.add("appended-class");
+
+            const myGageDiv = document.createElement("div");
+            myGageDiv.style.position = "relative";
+            myGageDiv.classList.add("my-gage");
+            myDeckDiv.appendChild(myGageDiv);
+
+            const myCardTable = document.createElement("table");
+            myCardTable.style.border = "solid 1px #fff";
+            myCardTable.style.borderCollapse = "separate";
+            myCardTable.style.borderSpacing = "2px";
+            myCardTable.style.margin = "auto";
+            const myCardTr = document.createElement("tr");
+            myCardTr.id = battleBlock.href + "_mydata";
+            myCardTable.appendChild(myCardTr);
+            myDeckDiv.appendChild(myCardTable);
+
+
+
+            const enemyDeckDiv = document.createElement("div")
+            enemyDeckDiv.style.position = "absolute";
+            enemyDeckDiv.style.right = "0";
+            enemyDeckDiv.style.width = "50%";
+            enemyDeckDiv.style.height = "70px";
+            enemyDeckDiv.style.top = "70px";
+            enemyDeckDiv.classList.add("appended-class");
+
+            const enemyGageDiv = document.createElement("div");
+            enemyGageDiv.style.position = "relative";
+            enemyGageDiv.classList.add("enemy-gage");
+            enemyDeckDiv.appendChild(enemyGageDiv);
+
+            const enemyCardTable = document.createElement("table");
+            enemyCardTable.style.border = "solid 1px #fff";
+            enemyCardTable.style.borderCollapse = "separate";
+            enemyCardTable.style.borderSpacing = "2px";
+            enemyCardTable.style.margin = "auto";
+            const enemyCardTr = document.createElement("tr");
+            enemyCardTr.id = battleBlock.href + "_enemydata";
+            enemyCardTable.appendChild(enemyCardTr);
+            enemyDeckDiv.appendChild(enemyCardTable);
+
+
+            battleBlock.appendChild(myDeckDiv)
+            battleBlock.appendChild(enemyDeckDiv)
+
+
+
+            appendDeck(battleBlock)
+
+        }
+
+    })
+
+
+    //    var fragment = document.createDocumentFragment();
+
+    //    var clone = document.importNode(template.content, true);
+    //        // 複製した各要素に値を設定
+    //        const wraparea = clone.querySelectorAll('.mb5');
+
+    //        console.log(clone)
+
+    // wraparea.style.height = "158px";
+    //     //    wraparea.appendChild(result);
 
 
 
     //   console.log(historyBlock)
     //   appendDeckArea(historyBlock);
     //   appendDeck(historyBlock)
-    }
-  });
-
-       fragment.appendChild(clone);
-       
-   document.getElementById('template').appendChild(fragment);
 }
 
-// function appendDeck(historyBlock){
-//   const myDeckArea = document.getElementById(historyBlock.href + "_mydata");
-//   const enemyDeckArea = document.getElementById(historyBlock.href + "_enemydata");
+function appendDeck(historyBlock) {
+    const host = document.getElementById('app');
+    const elem = host.getElementsByTagName('ekt-main')[0];
+    const myDeckArea = elem.shadowRoot.getElementById(historyBlock.href + "_mydata");
+    const enemyDeckArea = elem.shadowRoot.getElementById(historyBlock.href + "_enemydata");
 
-//   const request = new XMLHttpRequest();
-//   request.open("GET", historyBlock.href);
-//   request.responseType = "document";
-//   request.addEventListener("load", (event) => {
-//     if (event.target.status !== 200) {
-//       alert("データ取得に失敗しました、ステータスコード：" + event.target.status);
-//       return;
-//     }
-//     var myGage = event.target.responseXML.getElementsByClassName("battledetail_graph_own")[0]
-//     myGage.style.left = "30px";
+    const request = new XMLHttpRequest();
+    request.open("GET", historyBlock.href);
+    request.responseType = "document";
+    request.addEventListener("load", (event) => {
+        if (event.target.status !== 200) {
+            alert("データ取得に失敗しました、ステータスコード：" + event.target.status);
+            return;
+        }
 
-//     if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
-//       historyBlock.getElementsByClassName("my-gage")[0].appendChild(myGage);
-//     }
+        const template = event.target.responseXML.getElementById('template');
+        const mygage = event.target.responseXML.importNode(template.content, true);
 
-//     var myCardList = event.target.responseXML.getElementsByClassName("frame_red")[0].getElementsByClassName("data_deck_cardblock_card");
-//     var myCardCount = myCardList.length;
-//     for ( var i = myCardCount - 1; i >= 0 ; i--) {
-//       addCardToDeckArea(myDeckArea, myCardList[i]);
-//     };
 
-//     var enemyGage = event.target.responseXML.getElementsByClassName("battledetail_graph_enemy")[0]
-//     enemyGage.style.right = "30px";
+        const playerwraparea = mygage.querySelector('.gauge_base.player');
+        const playerchildwraparea = playerwraparea.querySelectorAll('.gauge')[0]
+        playerchildwraparea.style.width = playerchildwraparea.style.width + 'px';
+        playerchildwraparea.style.position = "absolute";
+        playerchildwraparea.style.background = '#00f000';
+        playerchildwraparea.style.height = "20px";
+        playerchildwraparea.style.top = "-13px";
 
-//     if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
-//       historyBlock.getElementsByClassName("enemy-gage")[0].appendChild(enemyGage);
-//     }
+        myDeckArea.parentNode.style.border = "none";
+        myDeckArea.parentNode.style.position = "absolute";
+        myDeckArea.parentNode.style.top = "12px";
+        myDeckArea.parentNode.style.left = "0";
+        myDeckArea.parentNode.style.right = "0";
+        myDeckArea.parentNode.style.margin = "0 auto";
 
-//     var enemyCardList = event.target.responseXML.getElementsByClassName("frame_blue")[0].getElementsByClassName("data_deck_cardblock_card");
-//     var enemyCardCount = enemyCardList.length;
-//     for ( var i = enemyCardCount - 1; i >= 0 ; i--) {
-//       addCardToDeckArea(enemyDeckArea, enemyCardList[i]);
-//     };
-//   });
-//   request.send();
-// }
+        historyBlock.getElementsByClassName("my-gage")[0].appendChild(playerchildwraparea);
+        const myCardList = mygage.querySelector(".detail_data.player").getElementsByClassName("general_data")[0].querySelectorAll(".general_1, .general_2, .general_3, .general_4, .general_5, .general_6, .general_7, .general_8");
+        const myCardCount = myCardList.length;
+        for (var i = myCardCount - 1; i >= 0; i--) {
+            addCardToDeckArea(myDeckArea, myCardList[i]);
+        };
 
-// function addCardToDeckArea(deckArea, card) {
-//   var cardTd = document.createElement("td");
-//   cardTd.style.position = "relative";
-//   cardTd.style.width = "30px";
-//   cardTd.style.height = "64px";
-//   cardTd.style.backgroundColor = "#000";
-//   cardTd.style.overflow = "hidden";
 
-//   card.style.width = "30px";
-//   card.style.height = "64px";
-//   card.firstElementChild.style.width = "30px";
 
-//   deckArea.insertBefore(cardTd, deckArea.firstChild).appendChild(card);
+        const enemywraparea = mygage.querySelector('.gauge_base.enemy');
+        const enemychildwraparea = enemywraparea.querySelectorAll('.gauge')[0]
+        enemychildwraparea.style.width = enemychildwraparea.style.width + 'px';
+        enemychildwraparea.style.position = "absolute";
+        enemychildwraparea.style.background = '#00f000';
+        enemychildwraparea.style.height = "20px";
+        enemychildwraparea.style.top = "2px";
 
-// }
+
+        enemyDeckArea.parentNode.style.border = "none";
+        enemyDeckArea.parentNode.style.position = "absolute";
+        enemyDeckArea.parentNode.style.top = "27px";
+        enemyDeckArea.parentNode.style.left = "0";
+        enemyDeckArea.parentNode.style.right = "0";
+        enemyDeckArea.parentNode.style.margin = "0 auto";
+
+        historyBlock.getElementsByClassName("enemy-gage")[0].appendChild(enemychildwraparea);
+        const enemyCardList = mygage.querySelector(".detail_data.enemy").getElementsByClassName("general_data")[0].querySelectorAll(".general_1, .general_2, .general_3, .general_4, .general_5, .general_6, .general_7, .general_8");
+
+
+
+        const enemyCardCount = enemyCardList.length;
+        for (var i = enemyCardCount - 1; i >= 0; i--) {
+            addCardToDeckArea(enemyDeckArea, enemyCardList[i]);
+        };
+
+
+        // historyBlock.getElementsByClassName("enemy-gage")[0].appendChild(enemywraparea);
+
+
+
+        // const host = event.target.responseXML.getElementById('app');
+        // const elem = host.getElementsByTagName('ekt-main')[0];
+        // const wraparea = elem.shadowRoot.querySelectorAll('.gauge_base');
+
+
+
+        // var myGage = event.target.responseXML.getElementsByClassName("gauge_base")
+
+        // wraparea.style.left = "30px";
+
+        // if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
+        //   historyBlock.getElementsByClassName("my-gage")[0].appendChild(myGage);
+        // }
+
+        // var myCardList = event.target.responseXML.getElementsByClassName("frame_red")[0].getElementsByClassName("data_deck_cardblock_card");
+        // var myCardCount = myCardList.length;
+        // for ( var i = myCardCount - 1; i >= 0 ; i--) {
+        //   addCardToDeckArea(myDeckArea, myCardList[i]);
+        // };
+
+        // var enemyGage = event.target.responseXML.getElementsByClassName("gauge_base enemy")[0]
+        // enemyGage.style.right = "30px";
+
+        // if (location.href.startsWith("https://eiketsu-taisen.net/members/history/daily")) {
+        //   historyBlock.getElementsByClassName("enemy-gage")[0].appendChild(enemyGage);
+        // }
+
+        // var enemyCardList = event.target.responseXML.getElementsByClassName("frame_blue")[0].getElementsByClassName("data_deck_cardblock_card");
+        // var enemyCardCount = enemyCardList.length;
+        // for ( var i = enemyCardCount - 1; i >= 0 ; i--) {
+        //   addCardToDeckArea(enemyDeckArea, enemyCardList[i]);
+        // };
+    });
+    request.send();
+}
+
+function addCardToDeckArea(deckArea, card) {
+
+    card.style.position = "relative"
+    card.style.height = "64px";
+    card.style.backgroundColor = "inherit";
+    card.style.overflow = "hidden";
+    card.style.height = "64px";
+
+    deckArea.insertBefore(card, deckArea.firstChild);
+
+    const areas = deckArea.getElementsByClassName('era');
+    const unitnames = deckArea.getElementsByClassName('unit_name');
+
+    while (areas.length) {
+        areas.item(0).remove();
+    }
+    while (unitnames.length) {
+        unitnames.item(0).remove();
+    }
+
+    const images = deckArea.getElementsByClassName('card');
+    for (var i = 0; i < images.length; i++) {
+        images[i].style.width = "30px";
+    }
+
+}
 
 // function toggleMyName() {
 //   [].forEach.call(document.getElementsByClassName("battle_list_mydata"), (mydata) => {
