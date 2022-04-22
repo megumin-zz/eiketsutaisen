@@ -31,14 +31,19 @@ function showDeckAtHistory() {
 }
 
 function removeAppendedElements() {
-    // const appendedElementList = getMainElement();
-    // const appendedElementList = wraparea.getElementsByClassName("appended-class");
-    // for (var i = appendedElementList.length - 1; i >= 0; i--) {
-    //     if(appendedElementList[i].getElementsByClassName("appended-class")) {
-    //         appendedElementList[i].remove();
-    //     }
+    const host = document.getElementById('app');
+    const elem = host.getElementsByTagName('ekt-main')[0];
 
-    // };
+    const contentList = elem.shadowRoot.querySelectorAll('.daily_log')[0];
+
+    const appendedElementList = contentList.getElementsByClassName("appended-class");
+
+    if (appendedElementList.length > 0) {
+        while (appendedElementList.length) {
+            appendedElementList.item(0).remove()
+        }
+    }
+
 }
 
 
