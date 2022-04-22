@@ -37,7 +37,7 @@ function removeAppendedElements() {
     //     if(appendedElementList[i].getElementsByClassName("appended-class")) {
     //         appendedElementList[i].remove();
     //     }
-        
+
     // };
 }
 
@@ -139,11 +139,11 @@ function appendDeck(historyBlock) {
         playerchildwraparea.style.display = "none";
 
         myDeckArea.parentNode.style.border = "none";
-        // myDeckArea.parentNode.style.position = "absolute";
-        // myDeckArea.parentNode.style.top = "0";
-        // myDeckArea.parentNode.style.left = "0";
-        // myDeckArea.parentNode.style.right = "0";
-        // myDeckArea.parentNode.style.margin = "0 auto";
+        myDeckArea.parentNode.style.position = "absolute";
+        myDeckArea.parentNode.style.top = "0";
+        myDeckArea.parentNode.style.left = "0";
+        myDeckArea.parentNode.style.right = "0";
+        myDeckArea.parentNode.style.margin = "0 auto";
 
         historyBlock.getElementsByClassName("my-gage")[0].appendChild(playerchildwraparea);
         const myCardList = mygage.querySelector(".detail_data.player").getElementsByClassName("general_data")[0].querySelectorAll(".general_1, .general_2, .general_3, .general_4, .general_5, .general_6, .general_7, .general_8");
@@ -174,9 +174,6 @@ function appendDeck(historyBlock) {
 
         historyBlock.getElementsByClassName("enemy-gage")[0].appendChild(enemychildwraparea);
         const enemyCardList = mygage.querySelector(".detail_data.enemy").getElementsByClassName("general_data")[0].querySelectorAll(".general_1, .general_2, .general_3, .general_4, .general_5, .general_6, .general_7, .general_8");
-
-
-
         const enemyCardCount = enemyCardList.length;
         for (var i = enemyCardCount - 1; i >= 0; i--) {
             addCardToDeckArea(enemyDeckArea, enemyCardList[i]);
@@ -186,14 +183,22 @@ function appendDeck(historyBlock) {
 }
 
 function addCardToDeckArea(deckArea, card) {
+    const li = document.createElement("li");
+
+    if (card.firstElementChild === null) {
+        return;
+    };
+
+    card = card.firstElementChild;
 
     card.style.position = "relative"
-    card.style.height = "64px";
     card.style.backgroundColor = "inherit";
     card.style.overflow = "hidden";
-    card.style.height = "64px";
+    card.style.height = "auto";
 
-    deckArea.insertBefore(card, deckArea.firstChild);
+    li.appendChild(card);
+
+    deckArea.insertBefore(li, deckArea.firstChild);
 
     const areas = deckArea.getElementsByClassName('era');
     const unitnames = deckArea.getElementsByClassName('unit_name');
