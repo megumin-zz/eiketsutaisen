@@ -62,6 +62,9 @@ function appendDeckArea() {
             myCardTable.style.borderCollapse = "separate";
             myCardTable.style.borderSpacing = "2px";
             const myCardTr = document.createElement("ul");
+            myCardTr.style.display = "flex";
+            myCardTr.style.justifyContent = "center";
+            myCardTr.style.alignContent = "center";
             myCardTr.id = battleBlock.href + "_mydata";
             myCardTable.appendChild(myCardTr);
             myDeckDiv.appendChild(myCardTable);
