@@ -57,6 +57,7 @@ function appendDeckArea() {
             myGageDiv.classList.add("my-gage");
             myDeckDiv.appendChild(myGageDiv);
 
+            const myCardWrapTable = document.createElement("div");
             const myCardTable = document.createElement("table");
             myCardTable.style.border = "solid 1px #fff";
             myCardTable.style.borderCollapse = "separate";
@@ -64,8 +65,9 @@ function appendDeckArea() {
             myCardTable.style.margin = "auto";
             const myCardTr = document.createElement("tr");
             myCardTr.id = battleBlock.href + "_mydata";
+            myCardWrapTable.appendChild(myCardTable);
             myCardTable.appendChild(myCardTr);
-            myDeckDiv.appendChild(myCardTable);
+            myDeckDiv.appendChild(myCardWrapTable);
 
 
 
