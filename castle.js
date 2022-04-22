@@ -58,6 +58,8 @@ function appendDeckArea() {
             myDeckDiv.appendChild(myGageDiv);
 
             const myCardWrapTable = document.createElement("div");
+            myCardWrapTable.style.width = "100%";
+            myCardWrapTable.style.display = "flex";
             const myCardTable = document.createElement("table");
             myCardTable.style.border = "solid 1px #fff";
             myCardTable.style.borderCollapse = "separate";
