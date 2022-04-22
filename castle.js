@@ -57,19 +57,14 @@ function appendDeckArea() {
             myGageDiv.classList.add("my-gage");
             myDeckDiv.appendChild(myGageDiv);
 
-            const myCardWrapTable = document.createElement("div");
-            myCardWrapTable.style.width = "100%";
-            myCardWrapTable.style.display = "flex";
-            const myCardTable = document.createElement("table");
-            myCardTable.style.border = "solid 1px #fff";
+
+            const myCardTable = document.createElement("div");
             myCardTable.style.borderCollapse = "separate";
             myCardTable.style.borderSpacing = "2px";
-            myCardTable.style.margin = "auto";
-            const myCardTr = document.createElement("tr");
+            const myCardTr = document.createElement("ul");
             myCardTr.id = battleBlock.href + "_mydata";
-            myCardWrapTable.appendChild(myCardTable);
             myCardTable.appendChild(myCardTr);
-            myDeckDiv.appendChild(myCardWrapTable);
+            myDeckDiv.appendChild(myCardTable);
 
 
 
@@ -157,11 +152,11 @@ function appendDeck(historyBlock) {
         playerchildwraparea.style.display = "none";
 
         myDeckArea.parentNode.style.border = "none";
-        myDeckArea.parentNode.style.position = "absolute";
-        myDeckArea.parentNode.style.top = "0";
-        myDeckArea.parentNode.style.left = "0";
-        myDeckArea.parentNode.style.right = "0";
-        myDeckArea.parentNode.style.margin = "0 auto";
+        // myDeckArea.parentNode.style.position = "absolute";
+        // myDeckArea.parentNode.style.top = "0";
+        // myDeckArea.parentNode.style.left = "0";
+        // myDeckArea.parentNode.style.right = "0";
+        // myDeckArea.parentNode.style.margin = "0 auto";
 
         historyBlock.getElementsByClassName("my-gage")[0].appendChild(playerchildwraparea);
         const myCardList = mygage.querySelector(".detail_data.player").getElementsByClassName("general_data")[0].querySelectorAll(".general_1, .general_2, .general_3, .general_4, .general_5, .general_6, .general_7, .general_8");
