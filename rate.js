@@ -8,7 +8,7 @@
 }
 )(function ($) {
     if (!confirm('集計を開始しますか？\n1~2分かかります、処理中はページを開いたままにしてください。\nまた、利用後はタブを閉じるようお願いします。')) {
-        alert('キャンセルしました、ScriptVersion: 3.5.0A');
+        alert('キャンセルしました');
         return;
     }
     class ComprehensiveRecord {
@@ -25,6 +25,7 @@
 
             for (let [_, monthlyRecord] of Object.entries(this.data)) {
                 for (let [title, value] of Object.entries(monthlyRecord.aggregateByTitle())) {
+
                     if (!_totalAggregateByTitleData[title]) { _totalAggregateByTitleData[title] = {} }
                     for (let [issue, count] of Object.entries(value)) {
                         if (!_totalAggregateByTitleData[title][issue]) { _totalAggregateByTitleData[title][issue] = 0 }
@@ -51,13 +52,6 @@
             this.data.push(battleListRecord);
         }
 
-        // {
-        //      daily?y=2021&m=2&d=1:
-        //          { 全国対戦戦績:
-        //              { winCount: 4, loseCount: 2, drawCount: 0, totalCount: 6} }
-        //          { 戦友対戦戦績:
-        //              { winCount: 1, loseCount: 1, drawCount: 0, totalCount: 2} }
-        // }
         getDailies() {
             let _getDailiesData = {};
 
@@ -74,7 +68,6 @@
 
         aggregateByTitle() {
             let _aggregateByTitleData = {};
-
             for (let [_daily, data] of Object.entries(this.getDailies())) {
                 for (let [title, value] of Object.entries(data)) {
                     if (!_aggregateByTitleData[title]) { _aggregateByTitleData[title] = {} }
@@ -98,6 +91,7 @@
         append(lineRecordBlock) {
             let r = lineRecordBlock;
 
+
             if (!this.data[this.daily]) { this.data[this.daily] = {}; }
             if (!this.data[this.daily][r.title]) { this.data[this.daily][r.title] = {}; }
 
@@ -119,7 +113,8 @@
             this.totalCount = 0;
         }
 
-        setCountByAlt(alt, count) {
+        setCountByAlt(alt, count, title) {
+            this.title = title;
             if (alt == '勝') {
                 this.winCount = Number(count);
             } else if (alt == '敗') {
@@ -141,36 +136,36 @@
         }
 
         totalBattleHtml() {
-            let innerHtml = '<div class="frame01"><div class="frame01_top"></div><div class="title2">総合戦績</div><div class="statistics_data">';
-            innerHtml += '<table class="statistics_ability_table">'
+            let innerHtml = '<div class="frame01 cmn_frame pad_m mt20"><div class="frame01_top mid"></div><p class="calendar_head mincho mid pb20">総合戦績</p><div class="statistics_data mid">';
+            innerHtml += '<table class="calendar" align="center" style="width: 70%">'
             innerHtml += '<tbody><tr><th>種別</th><th>勝ち/負け</th><th>勝率</th></tr>'
 
             for (let [title, value] of Object.entries(this.comprehensive.totalAggregateByTitle())) {
                 var calc = new VCalc(value);
-                innerHtml += `<tr><td>${title}</td><td>${calc.winCount}/${calc.loseCount}</td><td>${calc.winPer()}</td></tr>`;
+
+                innerHtml += `<tr style="height: 30px; line-height: 2;"><td>${title}</td><td>${calc.winCount}/${calc.loseCount}</td><td>${calc.winPer()}</td></tr>`;
             }
 
             innerHtml += '</table>'
-            innerHtml += '</div><div class="frame01_bottom"></div></div>'
+            innerHtml += '</div><div></div></div>'
 
             return innerHtml;
         }
 
         monthsBattleHtml() {
             let innerHtml = '';
-
             for (let [_, monthlyRecord] of Object.entries(this.comprehensive.data)) {
-                innerHtml += `<div class="frame01"><div class="frame01_top"></div><div class="title2">${monthlyRecord.title_calendar}</div><div class="statistics_data">`;
-                innerHtml += '<table class="statistics_ability_table">'
+                innerHtml += `<div class="frame01 cmn_frame pad_m mt20"><div class="frame01_top mid"></div><p class="calendar_head mincho mid pb20">${monthlyRecord.title_calendar}</p><div class="statistics_data mid">`;
+                innerHtml += '<table class="calendar" style="width: 70%">'
                 innerHtml += '<tbody><tr><th>種別</th><th>勝ち/負け</th><th>勝率</th></tr>'
 
                 for (let [title, value] of Object.entries(monthlyRecord.aggregateByTitle())) {
                     var calc = new VCalc(value);
-                    innerHtml += `<tr><td>${title}</td><td>${calc.winCount}/${calc.loseCount}</td><td>${calc.winPer()}</td></tr>`;
+                    innerHtml += `<tr style="height: 30px; line-height: 2;"><td>${title}</td><td>${calc.winCount}/${calc.loseCount}</td><td>${calc.winPer()}</td></tr>`;
                 }
 
                 innerHtml += '</table>'
-                innerHtml += '</div><div class="frame01_bottom"></div></div>'
+                innerHtml += '</div><div></div></div>'
             }
 
             return innerHtml;
@@ -207,9 +202,9 @@
 
             if ($("#bookmarklet_loading").length == 0) {
 
-               
 
-                $("#global_cover").append("<div id='bookmarklet_loading'>" + dispMsg + "</div>");
+
+                $("#app").append("<div id='bookmarklet_loading'>" + dispMsg + "</div>");
 
                 var ua = navigator.userAgent;
                 var width = window.innerWidth;
@@ -240,11 +235,10 @@
                     "text-align": "center",
                     "vertical-align": "middle",
                     "padding-top": "140px",
-                    "background": "url('https://chibicco.github.io/3594_bookmarklet/image/gif-load.gif') center center no-repeat"
+                    "background": "url('https://megumin-zz.github.io/eiketsutaisen/img/loading.gif') center center no-repeat"
                 });
             }
 
-            alert('ddd')
             d.resolve();
         }, 10);
         return d.promise();
@@ -279,7 +273,7 @@
 
     function wait(milliseconds = 2000) {
         var d = new $.Deferred();
-        setTimeout(function() {
+        setTimeout(function () {
             console.log("waiting " + milliseconds + " milliseconds");
             d.resolve();
         }, milliseconds);
@@ -289,12 +283,9 @@
     function callApi(monthlyRecord, daily) {
         var d = new $.Deferred();
 
-        alert('sss');
-
         $.ajax({
             url: "https://eiketsu-taisen.net/members/history/" + daily,
         }).done(function (data, status, xhr) {
-            console.log(daily);
 
             playDayNowCount++;
 
@@ -311,20 +302,28 @@
             }
 
             let battleListRecord = new BattleListRecord(daily);
-            $(data).find(".line_record_block").each(function (i, element) {
-                var lineRecordBlock = new LineRecordBlock($(element).find('img').attr('alt'));
+            var out_html = $($.parseHTML(data));
+            const listData = out_html.get();
+            const lineRecordBlock = new LineRecordBlock(listData);
+            for (var i = 0; i < listData.length; i++) {
+                if (listData[i].id == 'template') {
+                    const elem = listData[i].parentNode.getElementById('template');
+                    const wrapContents = elem.content.querySelector('.inner');
+                    const dl = wrapContents.querySelectorAll('dl:not(.total)');
+                    dl.forEach(item => {
+                        const dds = item.getElementsByTagName('dd');
+                        [].forEach.call(dds, (dd) => {
+                            const title = item.getElementsByTagName('dt')[0].textContent;
+                            const count_value = dd.getElementsByTagName('span')[0].textContent;
+                            const count_alt = dd.childNodes[1].textContent;
+                            lineRecordBlock.setCountByAlt(count_alt, count_value, title);
+                        })
+                        battleListRecord.append(lineRecordBlock);
+                    });
 
-                $(element).find('.count').each(function (i, element) {
-                    var count_alt = $(element).find('img').attr('alt'); // 戦, 勝, 敗, 分
-                    var count_value = $(element).text();
-                    lineRecordBlock.setCountByAlt(count_alt, count_value);
-                });
-
-                battleListRecord.append(lineRecordBlock);
-            });
-
+                }
+            }
             monthlyRecord.append(battleListRecord);
-
             d.resolve();
         }).fail(function (data) {
             return d.reject('取得に失敗しました、時間を置いてから実行してください。');
@@ -337,35 +336,34 @@
     let deferred = wait(0);
     let comprehensiveRecord = new ComprehensiveRecord();
     let playDayNowCount = 1;
-    let playDayAllCount = $("[class$='play_day']").length;
 
-    deferred.then(function() {
+    deferred.then(function () {
         return $.when(refreshResultHtml(), dispLoading());
     });
 
-    $('#contents').find("[class^='calendar calendar_']").each(function (i, element) {
-        alert('sss')
-        console.log(i)
-        console.log(element)
+    var contents = document.getElementById('app');
+    const elem = contents.getElementsByTagName('ekt-main')[0];
+    const playDays = elem.shadowRoot.querySelectorAll(`[class^='date_']`);
+    const calender = elem.shadowRoot.querySelectorAll('.mid');
+    let playDaysCount = 0;
+    playDays.forEach((item) => {
+        if (item.getElementsByTagName('a').length) {
+            playDaysCount++;
+        }
+    })
 
-        if (i != 0 && debugMode ) { return; }
-        var monthlyRecord = new MonthlyRecord($(element).prev().find('.calendar_head').children('span').text());
+    calender.forEach((item) => {
+        const monthlyRecord = new MonthlyRecord(item.getElementsByClassName('calendar_head')[0].firstElementChild.textContent);
+        const a = item.getElementsByTagName('a');
 
-        // console.log(monthlyRecord)
-
-        // $(this).find("[class$='play_day']").each(function (i, element) {
-        //     if (i != 0 && debugMode ) { return; }
-
-        //     // daily?y=2021&m=1&d=16
-        //     var daily = $(element).find('a').attr('href').replace(/^\.\//, '');
-
-        //     deferred = deferred.then(function() {
-        //         return $.when(callApi(monthlyRecord, daily), updateLoading(daily, playDayNowCount, playDayAllCount), wait(2500));
-        //     });
-        // });
-
+        [].forEach.call(a, (playDay) => {
+            const daily = playDay.getAttribute('href').replace(/^\.\//, '');
+                deferred = deferred.then(function () {
+                    return $.when(callApi(monthlyRecord, daily), updateLoading(daily, playDayNowCount, playDaysCount), wait(2500));
+                });
+        });
         comprehensiveRecord.add(monthlyRecord);
-    });
+    })
 
     deferred.always(function () {
         console.log("Always ：）");
@@ -373,7 +371,10 @@
     }).done(function () {
         console.log("Done ；）");
         let resultHtml = new ResultHtml(comprehensiveRecord);
-        $("#container").prepend("<span id='bookmarklet_result'>" + resultHtml.generate() + "<br></span>");
+        var contents = document.getElementById('app');
+        const elem = contents.getElementsByTagName('ekt-main')[0];
+        const resultContent = elem.shadowRoot.getElementById('contents')
+        resultContent.insertAdjacentHTML('afterbegin', "<span id='bookmarklet_result'>" + resultHtml.generate() + "<br></span>")
     }).fail(function (e) {
         console.log("Fail ：’）");
         alert(e);
