@@ -211,12 +211,12 @@
                 var height = window.innerHeight;
                 if ((ua.indexOf('iPhone') > 0 || ua.indexOf('Android') > 0) && ua.indexOf('Mobile') > 0) {
                     // スマートフォン用処理
-                    width = "200%";
-                    height = "200%";
+                    width = "100%";
+                    height = "100%";
                 } else if (ua.indexOf('iPad') > 0 || ua.indexOf('Android') > 0) {
                     // タブレット用処理
-                    width = "200%";
-                    height = "200%";
+                    width = "100%";
+                    height = "100%";
                 }
                 $("#bookmarklet_loading").css({
                     "display": "table",
