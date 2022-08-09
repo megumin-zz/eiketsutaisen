@@ -21,7 +21,7 @@ function main() {
 function getMainElement() {
     const host = document.getElementById('app');
     const elem = host.getElementsByTagName('ekt-main')[0];
-    return elem.shadowRoot.querySelectorAll('.daily_log');
+    return elem.shadowRoot.querySelectorAll('.daily_log > .mb20');
 }
 
 
@@ -48,11 +48,16 @@ function removeAppendedElements() {
 
 
 function appendDeckArea() {
-    const wraparea = getMainElement();
-//     for (var i = 0; i < wraparea.length; i++) {
-//         wraparea[i].style.position = "relative";
-//         wraparea[i].style.height = "135px";
-//     }
+    const wraparea = 
+          
+          
+          
+          
+          ();
+    for (var i = 0; i < wraparea.length; i++) {
+        wraparea[i].style.position = "relative";
+        wraparea[i].style.height = "135px";
+    }
 
     [].forEach.call(wraparea, (battleBlock, index) => {
         var battleType = battleBlock.getElementsByClassName("ta_r")[0];
