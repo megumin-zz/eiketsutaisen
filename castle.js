@@ -62,6 +62,7 @@ const wraparea = getMainElement();
             myDeckDiv.style.position = "absolute";
             myDeckDiv.style.width = "300px";
             myDeckDiv.style.height = "70px";
+            myDeckDiv.style.marginTop = "15px";
             myDeckDiv.classList.add("appended-class");
 
             const myGageDiv = document.createElement("div");
@@ -87,7 +88,7 @@ const wraparea = getMainElement();
             enemyDeckDiv.style.right = "0";
             enemyDeckDiv.style.width = "300px";
             enemyDeckDiv.style.height = "70px";
-            enemyDeckDiv.style.top = "58px";
+            enemyDeckDiv.style.marginTop = "15px";
             enemyDeckDiv.classList.add("appended-class");
 
             const enemyGageDiv = document.createElement("div");
@@ -172,7 +173,7 @@ function appendDeck(historyBlock) {
 
         enemyDeckArea.parentNode.style.border = "none";
         enemyDeckArea.parentNode.style.position = "absolute";
-        enemyDeckArea.parentNode.style.top = "27px";
+        enemyDeckArea.parentNode.style.top = "0";
         enemyDeckArea.parentNode.style.left = "0";
         enemyDeckArea.parentNode.style.right = "0";
         enemyDeckArea.parentNode.style.margin = "0 auto";
