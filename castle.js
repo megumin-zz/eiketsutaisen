@@ -48,12 +48,7 @@ function removeAppendedElements() {
 
 
 function appendDeckArea() {
-    const wraparea = 
-          
-          
-          
-          
-          ();
+const wraparea = getMainElement();
     for (var i = 0; i < wraparea.length; i++) {
         wraparea[i].style.position = "relative";
         wraparea[i].style.height = "135px";
