@@ -49,10 +49,10 @@ function removeAppendedElements() {
 
 function appendDeckArea() {
     const wraparea = getMainElement();
-    for (var i = 0; i < wraparea.length; i++) {
-        wraparea[i].style.position = "relative";
-        wraparea[i].style.height = "135px";
-    }
+//     for (var i = 0; i < wraparea.length; i++) {
+//         wraparea[i].style.position = "relative";
+//         wraparea[i].style.height = "135px";
+//     }
 
     [].forEach.call(wraparea, (battleBlock, index) => {
         var battleType = battleBlock.getElementsByClassName("ta_r")[0];
