@@ -21,7 +21,7 @@ function main() {
 function getMainElement() {
     const host = document.getElementById('app');
     const elem = host.getElementsByTagName('ekt-main')[0];
-    return elem.shadowRoot.querySelectorAll('.mb5');
+    return elem.shadowRoot.querySelectorAll('.mb20');
 }
 
 
