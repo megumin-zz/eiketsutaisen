@@ -308,8 +308,8 @@
             for (var i = 0; i < listData.length; i++) {
                 if (listData[i].id == 'template') {
                     const elem = listData[i].parentNode.getElementById('template');
-                    const wrapContents = elem.content.querySelector('.inner');
-                    const dl = wrapContents.querySelectorAll('dl:not(.total)');
+                    const wrapContents = elem.content.querySelector('.p-daily-record__inner');
+                    const dl = wrapContents.querySelectorAll('dl:not(.p-daily-record__container--total)');
                     dl.forEach(item => {
                         const dds = item.getElementsByTagName('dd');
                         [].forEach.call(dds, (dd) => {
